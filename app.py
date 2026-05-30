@@ -15,52 +15,73 @@ st.sidebar.markdown("""
 Built by **Leena Adapakala**
 Senior DevOps & Cloud Platform Engineer
 
-[LinkedIn](https://linkedin.com/in/leena-adapakala/) · [GitHub](https://github.com/LeenaAdapakala17/)
+[LinkedIn](https://linkedin.com/in/leena-adapakala/) · [GitHub](https://github.com/LeenaAdapakala17/aiops-incident-predictor)
 
 ---
 ### Pages
 - 📡 **Data Collector** — live metric stream
+- 📊 **SLO Dashboard** — error budget tracking
 - 🔴 **Live Monitor** — real-time risk dashboard
+- 🔍 **RCA & Solutions** — root cause + remediation
 - 📋 **Incident Log** — all flagged events
 - 🧠 **Model Insights** — feature importance
 
 ---
-### Domains
-| | Domain | Predicts |
-|---|---|---|
-| ☸️ | Kubernetes | OOMKill, CrashLoop, Eviction |
-| ☁️ | Cloud | CPU/Mem exhaustion, Quota |
-| 🌐 | Network | Latency, Packet loss, DNS |
-| 📦 | Application | Errors, Slow P99, Leak |
+### Predicts 17 incident types
+| | Domain |
+|---|---|
+| ☸️ | Kubernetes |
+| ☁️ | Azure Cloud |
+| 🌐 | Network |
+| 📦 | Application |
 """)
 
 st.markdown("""
 # 🔮 AIOps Incident Predictor
 
-Predict infrastructure failures across **Kubernetes, Cloud, Network, and Application** — **15, 30, and 60 minutes** before they happen.
+Predict infrastructure failures across **Kubernetes, Cloud, Network, and Application** —
+**15, 30, and 60 minutes** before they happen.
 
 ---
 
 ### Get started
-1. Go to **📡 Data Collector** — start the live metric stream
-2. Watch **🔴 Live Monitor** — see risk scores update in real time
-3. Review **📋 Incident Log** — all flagged incidents across every domain
-4. Explore **🧠 Model Insights** — understand what drives each prediction
+1. Go to **📡 Data Collector** — choose your data source and start collecting
+2. Watch **🔴 Live Monitor** — risk scores update automatically every scrape
+3. Review **🔍 RCA & Solutions** — root cause, business impact, and remediation commands
+4. Track **📊 SLO Dashboard** — availability % and error budget burn rate
+5. Explore **🧠 Model Insights** — see what drives each prediction
 
 ---
 
-### How the collector works
-The app simulates a **real Prometheus scrape loop** — polling all entities every N seconds.
-Each entity (pod, VM, service) has its own independent health state that drifts naturally over time.
-Anomalies build up gradually and recover on their own — exactly like real infrastructure behaves.
+### Data sources
 
-| Layer | Entities monitored |
+| Mode | What it collects |
 |---|---|
-| Kubernetes | 8 pods across 3 nodes |
-| Cloud (Azure) | 4 VMs |
-| Network | 5 services |
-| Application | 5 services |
+| ☸️ **AKS Simulation** | Realistic Azure Kubernetes cluster — 8 pods, 4 VMs, 5 network services, 5 application services. Anomalies build gradually, cascade across services, and self-heal. |
+| 🔥 **Prometheus Endpoint** | Connect your own Prometheus instance — paste your URL and the app scrapes your real infrastructure every N seconds. |
 
 ---
-*Python · Streamlit · Scikit-learn · Plotly*
+
+### What it predicts
+
+| Domain | Incident types |
+|---|---|
+| ☸️ Kubernetes | OOMKill · CrashLoopBackOff · CPU Throttling · Memory Pressure · Pod Stuck Pending |
+| ☁️ Azure Cloud | CPU Exhaustion · Memory Exhaustion · Disk IOPS Throttling · Quota Breach |
+| 🌐 Network | High Latency · Packet Loss · DNS Failures · Ingress Saturation |
+| 📦 Application | High Error Rate · Slow P99 · Memory Leak · Thread Pool Exhaustion |
+
+---
+
+### How predictions work
+
+- **ML model** (Random Forest) trained on realistic infrastructure patterns
+- **3 prediction horizons** — 15 min, 30 min, and 60 min ahead
+- **Smoothed risk scores** — no sudden jumps, trends build naturally
+- **Live retraining** — model adapts to your data every 50 scrapes
+- **Severity labels** — 🔴 Critical ≥ 70% · 🟡 Warning ≥ 40% · 🟢 Healthy < 40%
+
+---
+
+*Python · Streamlit · Scikit-learn · Plotly · psutil*
 """)
